@@ -1,0 +1,65 @@
+<header class="settings-view-header">
+    {{#link-to "settings" class="btn btn-default btn-back"}}Regresar{{/link-to}}
+    <h2 class="page-title">Labs</h2>
+</header>
+
+
+<section class="content settings-debug">
+    <form id="settings-export">
+        <fieldset>
+            <div class="form-group">
+                <label>Exportar</label>
+                <button type="button" class="btn btn-blue" {{action "exportData"}}>Exportar</button>
+                <p>Exportar la configuraci&oacute;n y la data del blog.</p>
+            </div>
+        </fieldset>
+    </form>
+    {{#gh-form id="settings-import" enctype="multipart/form-data"}}
+        <fieldset>
+            <div class="form-group">
+                <label>Importar</label>
+                {{partial "import-errors"}}
+                {{gh-file-upload id="importfile" uploadButtonText=uploadButtonText}}
+                <p>Importar desde otra instalacion de Ghost. Si importas un usuario, este reemplazara el usuario actual y cerrara la sesion.</p>
+            </div>
+        </fieldset>
+    {{/gh-form}}
+    <form id="settings-resetdb">
+        <fieldset>
+            <div class="form-group">
+                <label>Borrar todo el Contenido</label>
+                <button type="button" class="btn btn-red js-delete" {{action "openModal" "deleteAll"}}>Borrar</button>
+                <p>Borrar todos los posts y etiquetas de la base de datos.</p>
+            </div>
+        </fieldset>
+    </form>
+    <form id="settings-testmail">
+        <fieldset>
+            <div class="form-group">
+                <label>Enviar un email de prueba</label>
+                <button type="button" id="sendtestmail" class="btn btn-blue" {{action "sendTestEmail"}}>Enviar</button>
+                <p>Enviar un email de prueba a tu direccion.</p>
+            </div>
+        </fieldset>
+    </form>
+
+    <hr>
+
+    <form>
+        <fieldset>
+            {{#unless codeUIFlag}}
+            <div class="form-group for-checkbox">
+                <label for="labs-codeInjectionUI">Inyeccion de Codigo</label>
+                <label class="check box" for="labs-codeInjectionUI">
+                    {{input id="labs-codeInjectionUI" name="labs[codeInjectionUI]" type="checkbox"
+                    checked=useCodeInjectionUI}}
+                    <span class="input-toggle-component"></span>
+                    <p>Activar la interfaz de la inyección de código</p>
+                </label>
+                <p>Una pantalla de configuración que le permite agregar código en tu tema (trabajo en progreso - wip)</p>
+            </div>
+            {{/unless}}
+        </fieldset>
+    </form>
+
+</section>

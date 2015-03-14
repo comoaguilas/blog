@@ -1,0 +1,9 @@
+{{#gh-modal-dialog action="closeModal" showClose=true type="action" style="wide"
+    title="Esta seguro de borrar esta etiqueta?" confirm=confirm}}
+
+    {{#if model.post_count}}
+        <strong>ADVERTENCIA:</strong> <span class="red">Esta etiqueta esta unida a {{model.post_count}} {{postInflection}}.</span> Estas por borrar "<strong>{{model.name}}</strong>". Esto es permanente! Sin backup, sin restauracion, sin el boton magico deshacer. Estas advertido, ok?
+    {{else}}
+        <strong>ADVERTENCIA:</strong> Estas por borrar "<strong>{{model.name}}</strong>". Esto es permanente! Sin backup, sin restauracion, sin el boton magico deshacer. Estas advertido, ok?
+    {{/if}}
+{{/gh-modal-dialog}}

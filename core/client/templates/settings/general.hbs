@@ -1,0 +1,89 @@
+<header class="settings-view-header">
+    {{#link-to "settings" class="btn btn-default btn-back"}}Regresar{{/link-to}}
+    <h2 class="page-title">General</h2>
+    <section class="page-actions">
+        <button type="button" class="btn btn-blue" {{action "save"}}>Guardar</button>
+    </section>
+</header>
+
+<section class="content settings-general">
+    <form id="settings-general" novalidate="novalidate">
+        <fieldset>
+
+            <div class="form-group">
+                <label for="blog-title">Titulo del Blog</label>
+                {{input id="blog-title" name="general[title]" type="text" value=model.title}}
+                <p>El nombre de tu blog</p>
+            </div>
+
+            <div class="form-group description-container">
+                <label for="blog-description">Descripcion del Blog</label>
+                {{textarea id="blog-description" name="general[description]" value=model.description}}
+                <p>
+                    Describe de que se trata el blog
+                    {{gh-count-characters model.description}}
+                </p>
+
+            </div>
+        </fieldset>
+
+        <div class="form-group">
+            <label>Logo del Blog</label>
+            {{#if model.logo}}
+                <img class="blog-logo" {{bind-attr src=model.logo}} alt="logo" role="button" {{action "openModal" "upload" this "logo"}}>
+            {{else}}
+                <button type="button" class="btn btn-green js-modal-logo" {{action "openModal" "upload" this "logo"}}>Subir Imagen</button>
+            {{/if}}
+            <p>Muestra el logo para la publicacion</p>
+        </div>
+
+        <div class="form-group">
+            <label>Portada del Blog</label>
+            {{#if model.cover}}
+                <img class="blog-cover" {{bind-attr src=model.cover}} alt="cover photo" role="button" {{action "openModal" "upload" this "cover"}}>
+            {{else}}
+                <button type="button" class="btn btn-green js-modal-cover" {{action "openModal" "upload" this "cover"}}>Subir Imagen</button>
+            {{/if}}
+            <p>Muestra una imagen para la pagina</p>
+        </div>
+
+        <fieldset>
+            <div class="form-group">
+                <label for="email-address">Direccion de Email</label>
+                {{input id="email-address" name="general[email-address]" type="email" value=model.email autocapitalize="off" autocorrect="off"}}
+                <p>La direccion se usa para notificaciones administrativas</p>
+            </div>
+
+            <div class="form-group">
+                <label for="postsPerPage">Posts por pagina</label>
+                {{! `pattern` brings up numeric keypad allowing any number of digits}}
+                {{input id="postsPerPage" name="general[postsPerPage]" focus-out="checkPostsPerPage" value=model.postsPerPage min="1" max="1000" type="number" pattern="[0-9]*"}}
+                <p>Cuantos posts seran mostrados por pagina</p>
+            </div>
+
+            <div class="form-group for-checkbox">
+                <label for="permalinks">Permalinks con Fecha</label>
+                <label class="checkbox" for="permalinks">
+                    {{input id="permalinks" name="general[permalinks]" type="checkbox" checked=isDatedPermalinks}}
+                    <span class="input-toggle-component"></span>
+                    <p>Incluir la fecha en el URL del post</p>
+                </label>
+            </div>
+
+            <div class="form-group for-select">
+                <label for="activeTheme">Temas</label>
+                <span class="gh-select" {{bind-attr data-select-text=selectedTheme.label}} tabindex="0">
+                   {{view "select"
+                       id="activeTheme"
+                       name="general[activeTheme]"
+                       content=themes
+                       optionValuePath="content.name"
+                       optionLabelPath="content.label"
+                       value=model.activeTheme
+                       selection=selectedTheme}}
+               </span>
+                <p>Seleccione un tema para tu blog</p>
+            </div>
+        </fieldset>
+    </form>
+</section>

@@ -1,0 +1,11 @@
+{{#gh-modal-dialog action="closeModal" showClose=true type="action" style="wide" animation="fade"
+    title="Por favor re-autenticate" confirm=confirm}}
+
+        <form id="login" class="login-form" method="post" novalidate="novalidate" {{action "validateAndAuthenticate" on="submit"}}>
+            <div class="password-wrap">
+                {{input class="password" type="password" placeholder="Password" name="password" value=password}}
+            </div>
+            <button class="btn btn-blue" type="submit" {{action "validateAndAuthenticate"}} {{bind-attr disabled=submitting}}>Entrar</button>
+       </form>
+
+{{/gh-modal-dialog}}

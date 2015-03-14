@@ -1,0 +1,33 @@
+<section class="setup-box js-signup-box fade-in">
+    <div class="vertical">
+        <form id="signup" class="setup-form" method="post" novalidate="novalidate">
+
+            {{!-- Horrible hack to prevent Chrome from incorrectly auto-filling inputs --}}
+            <input style="display:none;" type="text" name="fakeusernameremembered"/>
+            <input style="display:none;" type="password" name="fakepasswordremembered"/>
+
+            <header>
+                <h1>Bienvenido a Ghost</h1>
+                <h2>Crea tu cuenta para empezar a publicar</h2>
+            </header>
+            <div class="form-group">
+                <label for="email">Direccion de Email</label>
+                {{input type="email" name="email" autocorrect="off" value=model.email }}
+                <p>Usada para notificaciones importantes</p>
+            </div>
+            <div class="form-group">
+                <label for="name">Nombre Completo</label>
+                {{gh-trim-focus-input type="text" name="name" autofocus="autofocus" autocorrect="off" value=model.name }}
+                <p>Este nombre se mostrara como firma en tus posts</p>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                {{input type="password" name="password" autofocus="autofocus" autocorrect="off" value=model.password }}
+                <p>Debe ser al menos 8 caracteres</p>
+            </div>
+            <footer>
+                <button type="submit" class="btn btn-green btn-lg" {{action "signup"}} {{bind-attr disabled=submitting}}>Crear Cuenta</button>
+            </footer>
+        </form>
+    </div>
+</section>

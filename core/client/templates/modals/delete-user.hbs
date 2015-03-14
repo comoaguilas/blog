@@ -1,0 +1,12 @@
+{{#gh-modal-dialog action="closeModal" showClose=true type="action" style="wide"
+    title="Esta seguro de borrar este usuario?" confirm=confirm}}
+
+    {{#unless userPostCount.isPending}}
+        {{#if userPostCount.count}}
+            <strong>ADVERTENCIA:</strong> <span class="red">Este usuarios es autor de {{userPostCount.count}} {{userPostCount.inflection}}.</span> Todos los posts seran borrados. No hay manera de recuperarlos.
+        {{else}}
+            <strong>ADVERTENCIA:</strong> Todos los posts seran borrados. No hay manera de recuperarlos.
+        {{/if}}
+    {{/unless}}
+
+{{/gh-modal-dialog}}
